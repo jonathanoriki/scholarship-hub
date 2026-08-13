@@ -129,6 +129,138 @@ st.markdown("""
 # ---------------------------------------------------------
 # MASTER SCHOLARSHIPS DATABASE (EXTENDED ARCHITECTURE)
 # ---------------------------------------------------------
+MASTER_SCHOLARSHIPS = [
+    {
+        "Name": "Chevening Scholarship",
+        "Level": "Master's",
+        "Host Country": "UK",
+        "Funding Type": "Fully Funded",
+        "Field": "Public Health, Governance, STEM, Leadership, Clinical Medicine",
+        "Min GPA": 3.0,
+        "Min Exp (Yrs)": 2,
+        "IELTS": 6.5,
+        "Deadline": "2026-11-03",
+        "Accepts African Students": True,
+        "Link": "https://www.chevening.org"
+    },
+    {
+        "Name": "Erasmus Mundus Joint Master Degrees (EMJMD)",
+        "Level": "Master's",
+        "Host Country": "Europe (Multiple)",
+        "Funding Type": "Fully Funded",
+        "Field": "Urban Planning, Biomedical Sciences, Data Science, Public Health",
+        "Min GPA": 3.2,
+        "Min Exp (Yrs)": 0,
+        "IELTS": 6.5,
+        "Deadline": "2027-01-15",
+        "Accepts African Students": True,
+        "Link": "https://erasmus-plus.ec.europa.eu"
+    },
+    {
+        "Name": "DAAD Development-Related Courses (EPOS)",
+        "Level": "Master's",
+        "Host Country": "Germany",
+        "Funding Type": "Fully Funded",
+        "Field": "Development Studies, Clinical Medicine, Public Health, Agriculture",
+        "Min GPA": 2.8,
+        "Min Exp (Yrs)": 2,
+        "IELTS": 6.0,
+        "Deadline": "2026-10-31",
+        "Accepts African Students": True,
+        "Link": "https://www.daad.de"
+    },
+    {
+        "Name": "Mastercard Foundation Scholars Program",
+        "Level": "Master's",
+        "Host Country": "Canada",
+        "Funding Type": "Fully Funded",
+        "Field": "Public Health, Engineering, AI, Agriculture, Nursing",
+        "Min GPA": 3.0,
+        "Min Exp (Yrs)": 0,
+        "IELTS": 6.5,
+        "Deadline": "2026-12-15",
+        "Accepts African Students": True,
+        "Link": "https://mastercardfdn.org"
+    },
+    {
+        "Name": "Commonwealth Master's & PhD Scholarships",
+        "Level": "Master's",
+        "Host Country": "UK",
+        "Funding Type": "Fully Funded",
+        "Field": "Climate Change, Economics, Health, Engineering, Law",
+        "Min GPA": 3.3,
+        "Min Exp (Yrs)": 0,
+        "IELTS": 6.5,
+        "Deadline": "2026-10-18",
+        "Accepts African Students": True,
+        "Link": "https://cscuk.fcdo.gov.uk"
+    },
+    {
+        "Name": "Fulbright Foreign Student Program",
+        "Level": "Master's",
+        "Host Country": "USA",
+        "Funding Type": "Fully Funded",
+        "Field": "All Fields",
+        "Min GPA": 3.2,
+        "Min Exp (Yrs)": 1,
+        "IELTS": 7.0,
+        "Deadline": "2026-09-30",
+        "Accepts African Students": True,
+        "Link": "https://fulbrightprogram.org"
+    },
+    {
+        "Name": "Türkiye Scholarships (Türkiye Bursları)",
+        "Level": "Bachelor's",
+        "Host Country": "Turkey",
+        "Funding Type": "Fully Funded",
+        "Field": "Medicine, Engineering, Law, Data Science",
+        "Min GPA": 3.0,
+        "Min Exp (Yrs)": 0,
+        "IELTS": 6.0,
+        "Deadline": "2027-02-20",
+        "Accepts African Students": True,
+        "Link": "https://www.turkiyeburslari.gov.tr"
+    },
+    {
+        "Name": "Joint Japan/World Bank Graduate Scholarship",
+        "Level": "Master's",
+        "Host Country": "Japan",
+        "Funding Type": "Fully Funded",
+        "Field": "Economics, Health Policy, Infrastructure, Agriculture",
+        "Min GPA": 3.0,
+        "Min Exp (Yrs)": 3,
+        "IELTS": 6.5,
+        "Deadline": "2027-03-25",
+        "Accepts African Students": True,
+        "Link": "https://www.worldbank.org"
+    },
+    {
+        "Name": "MEXT Japanese Government Scholarship",
+        "Level": "PhD",
+        "Host Country": "Japan",
+        "Funding Type": "Fully Funded",
+        "Field": "Biomedical Sciences, AI, Robotics, Medicine",
+        "Min GPA": 3.2,
+        "Min Exp (Yrs)": 0,
+        "IELTS": 6.5,
+        "Deadline": "2026-09-10",
+        "Accepts African Students": True,
+        "Link": "https://www.mext.go.jp"
+    },
+    {
+        "Name": "Mandela Rhodes Scholarship",
+        "Level": "Postdoctoral",
+        "Host Country": "South Africa",
+        "Funding Type": "Fully Funded",
+        "Field": "Leadership, Health, Public Policy, Humanities",
+        "Min GPA": 3.4,
+        "Min Exp (Yrs)": 0,
+        "IELTS": 6.5,
+        "Deadline": "2026-08-21",
+        "Accepts African Students": True,
+        "Link": "https://mandelarhodes.org"
+    }
+]
 
 # ---------------------------------------------------------
 # HERO LANDING SECTION

@@ -3,180 +3,272 @@ import pandas as pd
 
 # Page Configuration
 st.set_page_config(
-    page_title="Global Master's Scholarship & Prep Hub",
+    page_title="Global Master's & Public Health Leadership Portal",
     page_icon="🎓",
-    layout="wide"
+    layout="wide",
+    initial_sidebar_state="expanded"
 )
 
-# Header
-st.title("🎓 Global Master's Scholarship Intelligence & IELTS Hub")
-st.caption("Your all-in-one platform for tracking funding, verifying eligibility, reviewing SOPs, and practicing IELTS.")
-
-# Mock Database of Master's Scholarships
-SCHOLARSHIPS = [
-    {
-        "name": "Chevening Scholarship",
-        "country": "United Kingdom",
-        "funding": "Full Funding",
-        "deadline": "2026-11-03",
-        "min_gpa": 3.0,
-        "work_exp_years": 2,
-        "ielts_req": 6.5,
-        "link": "https://www.chevening.org"
-    },
-    {
-        "name": "Mastercard Foundation Scholars Program",
-        "country": "Global / Africa",
-        "funding": "Full Funding + Living Allowance",
-        "deadline": "2026-12-15",
-        "min_gpa": 3.2,
-        "work_exp_years": 0,
-        "ielts_req": 6.5,
-        "link": "https://mastercardfdn.org"
-    },
-    {
-        "name": "DAAD Development-Related Postgraduate Courses",
-        "country": "Germany",
-        "funding": "Monthly Stipend + Travel",
-        "deadline": "2026-10-31",
-        "min_gpa": 2.8,
-        "work_exp_years": 2,
-        "ielts_req": 6.0,
-        "link": "https://www.daad.de"
-    },
-    {
-        "name": "Erasmus Mundus Joint Master Degrees",
-        "country": "Europe (Multiple)",
-        "funding": "Full Tuition + Monthly Allowance",
-        "deadline": "2027-01-15",
-        "min_gpa": 3.0,
-        "work_exp_years": 0,
-        "ielts_req": 6.5,
-        "link": "https://erasmus-plus.ec.europa.eu"
+# Custom CSS for Modern UI, Custom Colors, and Card Styling
+st.markdown("""
+<style>
+    /* Main Theme Overrides */
+    .stApp {
+        background-color: #f8f9fa;
     }
-]
+    
+    /* Hero Banner Styling */
+    .hero-container {
+        background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+        padding: 2.5rem 2rem;
+        border-radius: 12px;
+        color: white;
+        margin-bottom: 2rem;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+    
+    .hero-title {
+        font-size: 2.5rem;
+        font-weight: 800;
+        margin-bottom: 0.5rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.1rem;
+        opacity: 0.9;
+    }
 
-# Tabs Definition
-tab1, tab2, tab3, tab4 = st.tabs([
+    /* Metric & Card Components */
+    .feature-card {
+        background-color: white;
+        padding: 1.5rem;
+        border-radius: 10px;
+        border-left: 5px solid #2a5298;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        margin-bottom: 1rem;
+    }
+    
+    /* Footer Styling */
+    .footer {
+        text-align: center;
+        padding: 2rem 0 1rem 0;
+        color: #6c757d;
+        font-size: 0.9rem;
+        border-top: 1px solid #e9ecef;
+        margin-top: 3rem;
+    }
+</style>
+""", unsafe_allow_html=True)
+
+# ---------------------------------------------------------
+# HERO SECTION
+# ---------------------------------------------------------
+st.markdown("""
+<div class="hero-container">
+    <div class="hero-title">🎓 Global Master's & Youth Leadership Hub</div>
+    <div class="hero-subtitle">Empowering young professionals with scholarship intelligence, SOP review tools, IELTS preparation resources, and advocacy insights.</div>
+</div>
+""", unsafe_allow_html=True)
+
+# Sidebar - Quick Profile & Contact Details
+with st.sidebar:
+    st.image("https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=500&q=80", caption="Global Opportunity Engine")
+    
+    st.markdown("### 📌 Navigation & Info")
+    st.info("Welcome! This platform provides curated data and tools for Master's applications in Clinical Sciences, Public Health, Urban Governance, and Public Policy.")
+    
+    st.markdown("---")
+    st.markdown("### 📬 Contact & Support")
+    st.markdown("""
+    * **Email:** support@globalopportunityhub.org
+    * **Location:** Nairobi / Eldoret, Kenya
+    * **Advocacy Desk:** Youth Leadership & Advisory Initiatives
+    """)
+    st.markdown("---")
+    st.caption("© 2026 Global Leadership Portal. All rights reserved.")
+
+# ---------------------------------------------------------
+# MAIN TAB NAVIGATION
+# ---------------------------------------------------------
+tab1, tab2, tab3, tab4, tab5 = st.tabs([
     "🔍 Open Scholarships", 
-    "📊 Eligibility Checker", 
-    "📄 Document & SOP Reviewer", 
-    "🎙️ IELTS Prep Engine"
+    "📊 Profile Eligibility Evaluator", 
+    "📄 SOP & Essay Analyzer", 
+    "🎙️ IELTS Prep Suite",
+    "📚 Resource Library & Downloads"
 ])
 
 # ---------------------------------------------------------
-# TAB 1: SCHOLARSHIP MONITOR
+# TAB 1: ENHANCED SCHOLARSHIP MONITOR
 # ---------------------------------------------------------
 with tab1:
-    st.header("Active Global Master's Scholarships")
-    df = pd.DataFrame(SCHOLARSHIPS)
+    st.subheader("🌐 Curated Global Master's Opportunities")
+    st.write("Browse fully funded and prestigious partially funded opportunities aligned with health, leadership, and international development.")
     
-    # Filter
-    funding_filter = st.multiselect("Filter by Funding Type", options=df["funding"].unique(), default=df["funding"].unique())
-    filtered_df = df[df["funding"].isin(funding_filter)]
+    # Visual cards for featured opportunities
+    col_a, col_b = st.columns(2)
     
-    st.dataframe(
-        filtered_df[["name", "country", "funding", "deadline", "ielts_req"]],
-        use_container_width=True
-    )
-    
-    st.subheader("Quick Links")
-    for item in SCHOLARSHIPS:
-        st.markdown(f"- **[{item['name']}]({item['link']})** | Country: {item['country']} | Deadline: `{item['deadline']}`")
+    with col_a:
+        st.markdown("""
+        <div class="feature-card">
+            <h4>🇬🇧 Chevening Master's Scholarship</h4>
+            <p><b>Coverage:</b> Full Tuition + Monthly Living Allowance + Airfare</p>
+            <p><b>Target Fields:</b> Global Health, Leadership, Public Policy, Governance</p>
+            <p><b>Key Requirement:</b> 2+ years professional work experience</p>
+        </div>
+        """, unsafe_allow_html=True)
+        st.link_button("Apply on Chevening Official Portal", "https://www.chevening.org")
+        
+        st.markdown("""
+        <div class="feature-card">
+            <h4>🇩🇪 DAAD EPOS Postgraduate Scholarship</h4>
+            <p><b>Coverage:</b> Monthly Stipend (€934) + Health Insurance + Travel Grant</p>
+            <p><b>Target Fields:</b> Development Studies, Clinical Medicine, Health Economics</p>
+            <p><b>Key Requirement:</b> Bachelor's degree + 2 years relevant experience</p>
+        </div>
+        """, unsafe_allow_html=True)
+        st.link_button("Explore DAAD EPOS Courses", "https://www.daad.de")
+
+    with col_b:
+        st.markdown("""
+        <div class="feature-card">
+            <h4>🌍 Mastercard Foundation Scholars Program</h4>
+            <p><b>Coverage:</b> Full Tuition + Accommodation + Laptop + Mentorship</p>
+            <p><b>Target Fields:</b> All Disciplines (Emphasis on African Youth & Social Impact)</p>
+            <p><b>Key Requirement:</b> Demonstrated leadership and community service record</p>
+        </div>
+        """, unsafe_allow_html=True)
+        st.link_button("Mastercard Foundation Portal", "https://mastercardfdn.org")
+
+        st.markdown("""
+        <div class="feature-card">
+            <h4>🇪🇺 Erasmus Mundus Joint Master Degrees (EMJMD)</h4>
+            <p><b>Coverage:</b> Full Fee Coverage + €1,400/month stipend</p>
+            <p><b>Target Fields:</b> Public Health, Urban Planning, Sustainability</p>
+            <p><b>Key Requirement:</b> High Academic Standing + Strong Motivation Statement</p>
+        </div>
+        """, unsafe_allow_html=True)
+        st.link_button("Browse Erasmus Master Catalog", "https://erasmus-plus.ec.europa.eu")
 
 # ---------------------------------------------------------
-# TAB 2: ELIGIBILITY CHECKER
+# TAB 2: ELIGIBILITY EVALUATOR
 # ---------------------------------------------------------
 with tab2:
-    st.header("Check Your Eligibility")
-    st.write("Enter your profile metrics to instantly see which scholarships you qualify for.")
+    st.subheader("📊 Interactive Profile Eligibility Checker")
+    st.write("Input your academic and professional qualifications to check instant alignment with major funding schemes.")
     
     col1, col2, col3 = st.columns(3)
     with col1:
-        user_gpa = st.number_input("Your Bachelor's GPA (4.0 Scale)", min_value=0.0, max_value=4.0, value=3.2, step=0.1)
+        user_gpa = st.slider("Bachelor's GPA / Degree Class", 2.0, 4.0, 3.4, 0.1)
     with col2:
-        user_exp = st.number_input("Years of Work Experience", min_value=0, max_value=20, value=2)
+        user_exp = st.number_input("Years of Professional/Internship Experience", 0, 15, 2)
     with col3:
-        user_ielts = st.number_input("Your IELTS Band Score (or estimated)", min_value=0.0, max_value=9.0, value=6.5, step=0.5)
+        user_ielts = st.selectbox("Target or Achieved IELTS Band", [6.0, 6.5, 7.0, 7.5, 8.0, 8.5])
         
-    if st.button("Evaluate Matches"):
-        st.subheader("Your Eligibility Results")
-        matches = 0
-        for item in SCHOLARSHIPS:
-            reasons = []
-            if user_gpa < item["min_gpa"]:
-                reasons.append(f"GPA lower than required minimum ({item['min_gpa']})")
-            if user_exp < item["work_exp_years"]:
-                reasons.append(f"Requires at least {item['work_exp_years']} years experience")
-            if user_ielts < item["ielts_req"]:
-                reasons.append(f"Requires minimum IELTS Band {item['ielts_req']}")
-                
-            if not reasons:
-                st.success(f"✅ **Eligible:** {item['name']} ({item['country']})")
-                matches += 1
-            else:
-                st.error(f"❌ **Not Eligible for {item['name']}:** " + ", ".join(reasons))
-        st.info(f"Summary: You qualify for {matches} out of {len(SCHOLARSHIPS)} monitored scholarships.")
+    st.markdown("---")
+    
+    if st.button("Evaluate Qualification Alignment", type="primary"):
+        st.write("### Evaluation Breakdown:")
+        
+        # Chevening Check
+        if user_exp >= 2 and user_ielts >= 6.5:
+            st.success("✅ **Chevening Scholarship:** High Eligibility. You meet experience and language prerequisites.")
+        else:
+            st.warning("⚠️ **Chevening Scholarship:** Requires at least 2 years of work experience and an IELTS of 6.5+.")
+            
+        # DAAD Check
+        if user_exp >= 2 and user_gpa >= 2.8:
+            st.success("✅ **DAAD EPOS:** Strong Match. Meets academic threshold and work experience baseline.")
+        else:
+            st.error("❌ **DAAD EPOS:** Recommended 2 years minimum post-graduation experience.")
+            
+        # Mastercard Foundation
+        if user_gpa >= 3.0:
+            st.success("✅ **Mastercard Foundation:** Excellent Fit. Focus heavy emphasis in your SOP on youth advocacy & community impact.")
 
 # ---------------------------------------------------------
-# TAB 3: SOP & DOCUMENT REVIEWER
+# TAB 3: DOCUMENT & SOP ANALYZER
 # ---------------------------------------------------------
 with tab3:
-    st.header("Statement of Purpose (SOP) Analyzer")
-    st.write("Paste your Statement of Purpose or Motivation Letter below for instant structural evaluation.")
+    st.subheader("📄 Statement of Purpose (SOP) & Essay Audit")
+    st.write("Paste your motivation statement or personal response below for automated structural feedback.")
     
-    sop_text = st.text_area("Paste your SOP draft here (minimum 100 words):", height=250)
+    sop_text = st.text_area("Paste draft here:", height=200, placeholder="Start typing or paste your Statement of Purpose draft...")
     
-    if st.button("Analyze Statement"):
+    if st.button("Run SOP Structural Audit", type="primary"):
         words = len(sop_text.split())
-        st.subheader("Analysis Feedback")
         
-        # Simple rule-based rubric evaluation
-        if words < 100:
-            st.warning("⚠️ Statement is too short. Most Master's SOPs require 500–800 words.")
-        else:
-            st.success(f"✅ Word Count: **{words} words** (Good length)")
-            
-            # Key section checks
-            has_leadership = any(w in sop_text.lower() for w in ["lead", "leadership", "project", "initiative", "managed"])
-            has_future = any(w in sop_text.lower() for w in ["goal", "future", "career", "vision", "impact", "return"])
-            has_academic = any(w in sop_text.lower() for w in ["bachelor", "degree", "research", "study", "thesis"])
-            
-            col_a, col_b, col_c = st.columns(3)
-            with col_a:
-                st.metric("Academic Background Focus", "Detected" if has_academic else "Missing")
-            with col_b:
-                st.metric("Leadership & Action Proof", "Detected" if has_leadership else "Needs Enhancement")
-            with col_c:
-                st.metric("Career Vision & Impact", "Detected" if has_future else "Needs Enhancement")
+        st.markdown("#### Audit Results:")
+        m1, m2, m3 = st.columns(3)
+        m1.metric("Word Count", f"{words} Words", "Ideal: 500-800" if 500 <= words <= 800 else "Adjust Length")
+        
+        # Pillar Analysis
+        leadership_words = ["lead", "managed", "initiative", "project", "advocacy", "spearheaded", "community", "clinical"]
+        future_words = ["goal", "vision", "impact", "return", "policy", "development", "master"]
+        
+        has_lead = sum(sop_text.lower().count(w) for w in leadership_words)
+        has_future = sum(sop_text.lower().count(w) for w in future_words)
+        
+        m2.metric("Leadership & Action Focus", f"{has_lead} Mention(s)", "Strong" if has_lead >= 3 else "Add Action Verbs")
+        m3.metric("Career Vision & Impact", f"{has_future} Mention(s)", "Clear" if has_future >= 2 else "Expand Future Goals")
 
 # ---------------------------------------------------------
-# TAB 4: IELTS PREP ENGINE
+# TAB 4: IELTS PREPARATION SUITE
 # ---------------------------------------------------------
 with tab4:
-    st.header("IELTS Prep Center")
-    prep_mode = st.radio("Choose Practice Module:", ["Writing Task 2 Essay Criteria", "Speaking Prompt Generator"])
+    st.subheader("🎙️ IELTS Preparation Suite")
     
-    if prep_mode == "Writing Task 2 Essay Criteria":
-        st.subheader("Writing Task 2 Rubric Checklist")
-        st.markdown("""
-        Ensure your essay covers these core scoring pillars before submitting:
-        - [ ] **Task Achievement:** Fully answers all parts of the prompt with clear position throughout.
-        - [ ] **Coherence & Cohesion:** Clear paragraphing with transition words (e.g., *Furthermore, Consequently*).
-        - [ ] **Lexical Resource:** Uses varied, high-level vocabulary without repetition.
-        - [ ] **Grammatical Range & Accuracy:** Mix of simple, compound, and complex sentences.
-        """)
-    else:
-        st.subheader("Randomized IELTS Speaking Part 2 Card")
-        if st.button("Generate Topic Card"):
+    col_i1, col_i2 = st.columns([1, 1])
+    
+    with col_i1:
+        st.markdown("### ✍️ Writing Task 2 Checklist")
+        st.checkbox("Task Response: Answered all parts of the essay prompt clearly.")
+        st.checkbox("Coherence: Clear paragraph structure with transitions (However, Furthermore, Consequently).")
+        st.checkbox("Lexical Resource: Used high-level academic vocabulary (e.g., *implement, systemic, substantial*).")
+        st.checkbox("Grammar: Mixed complex and compound sentence structures correctly.")
+
+    with col_i2:
+        st.markdown("### 🗣️ Speaking Part 2 Prompt Engine")
+        if st.button("Generate Random Speaking Prompt"):
             st.info("""
-            **Topic:** Describe a community initiative or project you participated in that had a positive outcome.
+            **Topic:** Describe a community initiative or healthcare project you led or participated in.
             
-            **You should say:**
-            - What the initiative was
-            - Who was involved
-            - What your specific role was
-            - And explain why you feel this project was successful.
-            
-            *Preparation time: 1 minute | Speaking time: 1–2 minutes*
+            **Include in your talk:**
+            - What the initiative was and who benefited
+            - Your specific responsibilities
+            - The challenges faced and how they were resolved
+            - Why this experience shaped your professional goals
             """)
+
+# ---------------------------------------------------------
+# TAB 5: RESOURCE LIBRARY & DOWNLOADS
+# ---------------------------------------------------------
+with tab5:
+    st.subheader("📚 Free Downloads & Templates")
+    st.write("Download reference materials and guides directly to assist your application journey.")
+    
+    r1, r2, r3 = st.columns(3)
+    
+    with r1:
+        st.markdown("#### 📝 Standard SOP Template")
+        st.write("A structured outline following standard international university formats.")
+        st.download_button("Download SOP Template (.txt)", data="1. Introduction & Background\n2. Academic Achievements\n3. Leadership Experience\n4. Why this University\n5. Future Goals", file_name="SOP_Template.txt")
+
+    with r2:
+        st.markdown("#### 🌟 Action Verbs Guide")
+        st.write("A curated list of impactful verbs for resumes and recommendation letters.")
+        st.download_button("Download Verbs Guide (.txt)", data="Spearheaded, Coordinated, Implemented, Orchestrated, Evaluated, Pioneered", file_name="Action_Verbs.txt")
+
+    with r3:
+        st.markdown("#### 📑 IELTS Writing Rubric")
+        st.write("Official scoring breakdown for Band 7+ Task 2 response criteria.")
+        st.download_button("Download Rubric Summary (.txt)", data="Band 7 Requirements: Flexible use of cohesive devices, clear main ideas, varied vocabulary.", file_name="IELTS_Band7_Guide.txt")
+
+# ---------------------------------------------------------
+# FOOTER
+# ---------------------------------------------------------
+st.markdown("""
+<div class="footer">
+    Global Master's Scholarship & Youth Leadership Hub • Built with Python & Streamlit
+</div>
+""", unsafe_allow_html=True)

@@ -391,7 +391,7 @@ with tabs[2]:
     st.write("Track upcoming deadlines with live status indicators.")
     
     today = date.today()
-    for sch in MASTER_SCHOLARSHIPS:
+    for _, sch in scholarships_csv.iterrows():
         deadline_date = datetime.strptime(sch["Deadline"], "%Y-%m-%d").date()
         days_left = (deadline_date - today).days
         

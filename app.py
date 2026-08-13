@@ -1,7 +1,22 @@
 import streamlit as st
 import pandas as pd
 from datetime import date, datetime, timedelta
+# LOAD CSV DATABASES
 
+try:
+    scholarships_csv = pd.read_csv("data/scholarships.csv")
+except:
+    scholarships_csv = pd.DataFrame()
+
+try:
+    universities_csv = pd.read_csv("data/universities.csv")
+except:
+    universities_csv = pd.DataFrame()
+
+try:
+    countries_csv = pd.read_csv("data/countries.csv")
+except:
+    countries_csv = pd.DataFrame()
 # ---------------------------------------------------------
 # PAGE CONFIGURATION & METADATA
 # ---------------------------------------------------------

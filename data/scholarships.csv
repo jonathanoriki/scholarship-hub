@@ -1,6 +1,6 @@
-Scholarship,Country,Degree,Funding,Deadline,Field,IELTS,GPA
-Chevening,United Kingdom,Masters,Fully Funded,2026-11-01,Any,6.5,3.0
-DAAD EPOS,Germany,Masters,Fully Funded,2026-10-15,Development Studies,6.5,3.0
-Erasmus Mundus,Europe,Masters,Fully Funded,2026-12-01,Any,6.5,3.0
-Commonwealth Scholarship,United Kingdom,Masters,Fully Funded,2026-11-15,Any,6.5,3.0
-Mastercard Foundation,Canada,Masters,Fully Funded,2026-10-01,Any,6.0,2.8
+Name,Level,Host Country,Funding Type,Field,Min GPA,Min Exp (Yrs),IELTS,Deadline,Accepts African Students,Link
+Chevening Scholarship,Master's,UK,Fully Funded,"Public Health, Governance, STEM, Leadership, Clinical Medicine",3.0,2,6.5,2026-11-03,True,https://www.chevening.org
+Erasmus Mundus Joint Master Degrees (EMJMD),Master's,"Europe (Multiple)",Fully Funded,"Urban Planning, Biomedical Sciences, Data Science, Public Health",3.2,0,6.5,2027-01-15,True,https://erasmus-plus.ec.europa.eu
+DAAD Development-Related Courses (EPOS),Master's,Germany,Fully Funded,"Development Studies, Clinical Medicine, Public Health, Agriculture",2.8,2,6.0,2026-10-31,True,https://www.daad.de
+Mastercard Foundation Scholars Program,Master's,Canada,Fully Funded,"Public Health, Engineering, AI, Agriculture, Nursing",3.0,0,6.5,2026-12-15,True,https://mastercardfdn.org
+Commonwealth Master's & PhD Scholarships,Master's,UK,Fully Funded,"Climate Change, Economics, Health, Engineering, Law",3.3,0,6.5,2026-10-18,True,https://cscuk.fcdo.gov.uk

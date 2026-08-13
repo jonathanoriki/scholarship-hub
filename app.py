@@ -222,8 +222,8 @@ with tab_tracker:
     st.subheader("📅 Your Personal Application Milestone Tracker")
     st.write("Map out your deadlines, set task status, and track your progress live.")
     
-    # Session state for application milestones
-    if "milestones" not in st.cookies and "app_tasks" not in st.session_state:
+    # Session state for application milestones (FIXED)
+    if "app_tasks" not in st.session_state:
         st.session_state.app_tasks = [
             {"Task": "Order Official Academic Transcripts", "Target Date": date(2026, 8, 30), "Status": "In Progress"},
             {"Task": "Request 2 Academic/Professional Recommendation Letters", "Target Date": date(2026, 9, 15), "Status": "Not Started"},
@@ -294,6 +294,21 @@ with tab_essays:
         </div>
         """, unsafe_allow_html=True)
         
+    elif essay_choice == "Chevening: Networking & Relationship Building":
+        st.markdown("""
+        <div class="card-box">
+            <h3>🇬🇧 Chevening Networking Essay Blueprint (500 words)</h3>
+            <p><b>Goal:</b> Demonstrate how you build, maintain, and leverage professional relationships to achieve impactful goals.</p>
+            <hr>
+            <h4>Key Elements:</h4>
+            <ul>
+                <li>Show how you forged professional connections across organizations, health systems, or youth platforms.</li>
+                <li>Give a concrete example where your network directly helped solve a problem or scale an initiative.</li>
+                <li>Explain how you plan to contribute to and benefit from the global Chevening alumni network.</li>
+            </ul>
+        </div>
+        """, unsafe_allow_html=True)
+        
     elif essay_choice == "Erasmus Mundus: Motivation Statement":
         st.markdown("""
         <div class="card-box">
@@ -307,6 +322,36 @@ with tab_essays:
                 <li><b>Mobility Track Motivation:</b> Address why moving between different countries during the program benefits your global perspective.</li>
                 <li><b>Future Reintegration Plan:</b> Detail how you will apply the acquired Master's knowledge back in your home country or region.</li>
             </ul>
+        </div>
+        """, unsafe_allow_html=True)
+
+    elif essay_choice == "DAAD: Letter of Motivation Structure":
+        st.markdown("""
+        <div class="card-box">
+            <h3>🇩🇪 DAAD Letter of Motivation Blueprint</h3>
+            <p><b>Goal:</b> Convince the German selection committee of your academic rigor and commitment to developmental goals.</p>
+            <hr>
+            <ul>
+                <li>Focus heavily on the development relevance of your chosen course (e.g., public health systems, clinical research, urban policy).</li>
+                <li>Highlight your minimum 2 years of professional experience after your Bachelor's degree.</li>
+                <li>Provide a clear 5-year career roadmap showing your planned contributions after returning home.</li>
+            </ul>
+        </div>
+        """, unsafe_allow_html=True)
+
+    elif essay_choice == "General Statement of Purpose (SOP) Framework":
+        st.markdown("""
+        <div class="card-box">
+            <h3>🌐 Standard Master's Statement of Purpose Framework</h3>
+            <p><b>Goal:</b> A universal structure for US, European, UK, and Australian university admissions.</p>
+            <hr>
+            <ol>
+                <li><b>Hook & Academic Focus:</b> Introduce your specific field of passion clearly without generic clichés.</li>
+                <li><b>Academic Foundation:</b> Highlight key research projects, thesis work, or clinical distinctions.</li>
+                <li><b>Professional & Field Experience:</b> Detail impactful projects, leadership roles, and community achievements.</li>
+                <li><b>Why This Program:</b> Name specific modules, professors, labs, or university initiatives.</li>
+                <li><b>Long-Term Goals:</b> Connect the degree directly to your 5-to-10-year professional trajectory.</li>
+            </ol>
         </div>
         """, unsafe_allow_html=True)
 
@@ -336,6 +381,24 @@ with tab_ielts:
             - **Body Paragraph 1:** Reason 1 - Direct societal impact of medical advances (e.g., disease mitigation, clinical innovation).
             - **Body Paragraph 2:** Reason 2 - Economic burden reduction on healthcare systems.
             - **Conclusion:** Restate thesis using varied vocabulary + Final outlook statement.
+            """)
+        elif prompt_type == "Discussion (Both Views)":
+            st.info("""
+            **Sample Prompt:** *Some think high school graduates should take a gap year to work or travel, while others think they should go straight to university. Discuss both views and give your opinion.*
+            
+            **Recommended Structure:**
+            - **Intro:** Paraphrase prompt + Give outline statement.
+            - **Body 1:** Discuss View A (Gaining real-world experience & financial independence).
+            - **Body 2:** Discuss View B (Maintaining academic momentum and graduating earlier).
+            - **Conclusion:** Reiterate your perspective with strong supporting logic.
+            """)
+        elif prompt_type == "Problem & Solution":
+            st.info("""
+            **Sample Prompt:** *Rapid urbanization is causing overcrowding and healthcare strain in major cities. What problems does this cause, and what solutions can be implemented?*
+            
+            **Recommended Structure:**
+            - **Body 1:** Identify 2 main issues (Infrastructure overload & disease transmission risks).
+            - **Body 2:** Propose 2 direct solutions (Urban decentralization policies & boosted primary health funding).
             """)
             
     with ielts_tab2:

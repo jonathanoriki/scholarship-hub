@@ -321,7 +321,7 @@ with tabs[0]:
         s_field = st.selectbox("Academic Field", ["All", "Public Health", "Clinical Medicine", "Engineering", "AI", "Economics", "Climate Change"])
         
     # Data Filter Logic
-    df = pd.DataFrame(MASTER_SCHOLARSHIPS)
+    df = scholarships_csv.copy()
     
     if s_level != "All":
         df = df[df["Level"] == s_level]

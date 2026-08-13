@@ -367,7 +367,7 @@ with tabs[1]:
 
     if submit_match:
         st.markdown("### 📊 Your Tailored Match Analysis")
-        for sch in MASTER_SCHOLARSHIPS:
+        for _, sch in scholarships_csv.iterrows():
             # Simple Scoring Algorithm Simulation
             score = 70
             if u_gpa >= sch["Min GPA"]: score += 10

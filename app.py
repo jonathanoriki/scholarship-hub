@@ -2,6 +2,8 @@ import streamlit as st
 import pandas as pd
 if "saved_scholarships" not in st.session_state:
     st.session_state.saved_scholarships = []
+    if "applications" not in st.session_state:
+    st.session_state.applications = []
 from datetime import date, datetime, timedelta
 # LOAD CSV DATABASES
 
@@ -337,6 +339,7 @@ tabs = st.tabs([
     "🏆 Success Stories", 
     "💬 AI Coach",
     "⭐ Saved Scholarships",
+    "📋 Application Tracker",
     "💬 Community Forum"
 ])
 
@@ -802,7 +805,7 @@ with tabs[15]:
         )
 # TAB 16: COMMUNITY FORUM
 # ---------------------------------------------------------
-with tabs[16]:
+with tabs[17]:
     st.subheader("💬 Peer Application Forum")
     st.text_area("Post a question to the community:", placeholder="Ask about Chevening interview prep, Erasmus Mundus mobility tracks...")
     if st.button("Post Question"):

@@ -279,7 +279,40 @@ m1.markdown("<div class='metric-card'><h3>1,000+</h3><p>Active Scholarships</p><
 m2.markdown("<div class='metric-card'><h3>100+</h3><p>Countries Covered</p></div>", unsafe_allow_html=True)
 m3.markdown("<div class='metric-card'><h3>500+</h3><p>Top Universities</p></div>", unsafe_allow_html=True)
 m4.markdown("<div class='metric-card'><h3>$500M+</h3><p>Funding Opportunities</p></div>", unsafe_allow_html=True)
+# Scholarship Statistics Dashboard
 
+st.markdown("## 📊 Scholarship Statistics")
+
+col1, col2, col3, col4 = st.columns(4)
+
+with col1:
+    st.metric("🎓 Scholarships", len(scholarships_csv))
+
+with col2:
+    st.metric(
+        "💰 Fully Funded",
+        len(
+            scholarships_csv[
+                scholarships_csv["Funding Type"].str.contains(
+                    "Fully",
+                    case=False,
+                    na=False
+                )
+            ]
+        )
+    )
+
+with col3:
+    st.metric(
+        "🌍 Countries",
+        scholarships_csv["Host Country"].nunique()
+    )
+
+with col4:
+    st.metric(
+        "📅 Deadlines",
+        scholarships_csv["Deadline"].count()
+    )
 st.markdown("<br>", unsafe_allow_html=True)
 
 # ---------------------------------------------------------

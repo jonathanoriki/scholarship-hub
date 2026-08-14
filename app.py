@@ -789,7 +789,7 @@ with tabs[15]:
         )
 # TAB 16: COMMUNITY FORUM
 # ---------------------------------------------------------
-with tabs[15]:
+with tabs[16]:
     st.subheader("💬 Peer Application Forum")
     st.text_area("Post a question to the community:", placeholder="Ask about Chevening interview prep, Erasmus Mundus mobility tracks...")
     if st.button("Post Question"):

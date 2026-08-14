@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 from datetime import date, datetime, timedelta
+from openai import OpenAI
 # LOAD CSV DATABASES
 
 try:
@@ -17,6 +18,9 @@ try:
     countries_csv = pd.read_csv("data/countries.csv")
 except:
     countries_csv = pd.DataFrame()
+client = OpenAI(
+    api_key=st.secrets["OPENAI_API_KEY"]
+)
 # ---------------------------------------------------------
 # PAGE CONFIGURATION & METADATA
 # ---------------------------------------------------------
@@ -637,15 +641,58 @@ with tabs[13]:
 # TAB 15: AI SCHOLARSHIP COACH
 # ---------------------------------------------------------
 with tabs[14]:
-    st.subheader("💬 AI Scholarship Advisory Coach")
-    user_query = st.text_input("Ask your scholarship question:", placeholder="e.g., I am a clinical officer with GPA 3.4. What fully funded health scholarships fit me?")
-    if user_query:
-        st.success("""
-        **AI Advisory Analysis:**
-        1. **Top Recommendation:** DAAD EPOS (Postgraduate Courses in Public Health) & Chevening UK.
-        2. **Strategy:** Focus your essay on health systems management and rural public health challenges.
-        3. **Key Milestone:** Schedule your IELTS Academic exam before October to meet early application deadlines.
-        """)
+
+    st.subheader("🤖 AI Scholarship Advisory Coach")
+
+    user_query = st.text_area(
+        "Describe your profile",
+        placeholder="Example: I am a Clinical Officer from Kenya with GPA 3.4, 2 years experience, interested in Public Health and fully funded Master's scholarships."
+    )
+
+    if st.button("Generate AI Scholarship Advice"):
+
+        with st.spinner("Analyzing your profile..."):
+
+            try:
+
+                response = client.chat.completions.create(
+                    model="gpt-4o-mini",
+                    messages=[
+                        {
+                            "role": "system",
+                            "content": """
+                            You are ScholarAtlas AI,
+                            a world-class scholarship advisor.
+
+                            Give:
+                            1. Suitable scholarships
+                            2. Eligibility assessment
+                            3. Application strategy
+                            4. Essay recommendations
+                            5. Timeline guidance
+
+                            Keep responses professional and practical.
+                            """
+                        },
+                        {
+                            "role": "user",
+                            "content": user_query
+                        }
+                    ],
+                    temperature=0.7
+                )
+
+                st.success("AI Analysis Complete")
+
+                st.write(
+                    response.choices[0].message.content
+                )
+
+            except Exception as e:
+
+                st.error(
+                    f"OpenAI Error: {e}"
+                )
 
 # ---------------------------------------------------------
 # TAB 16: COMMUNITY FORUM

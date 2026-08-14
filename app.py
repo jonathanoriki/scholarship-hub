@@ -2,7 +2,10 @@ import streamlit as st
 import pandas as pd
 if "saved_scholarships" not in st.session_state:
     st.session_state.saved_scholarships = []
-    if "applications" not in st.session_state:
+if "saved_scholarships" not in st.session_state:
+    st.session_state.saved_scholarships = []
+
+if "applications" not in st.session_state:
     st.session_state.applications = []
 from datetime import date, datetime, timedelta
 # LOAD CSV DATABASES

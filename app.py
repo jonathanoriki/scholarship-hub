@@ -414,23 +414,81 @@ with tabs[1]:
         submit_match = st.form_submit_button("Calculate Matching Scores", type="primary")
 
     if submit_match:
-        st.markdown("### 📊 Your Tailored Match Analysis")
-        for _, sch in scholarships_csv.iterrows():
-            # Simple Scoring Algorithm Simulation
-            score = 70
-            if u_gpa >= sch["Min GPA"]: score += 10
-            if u_exp >= sch["Min Exp (Yrs)"]: score += 10
-            if u_ielts >= sch["IELTS"]: score += 10
-            
-            score = min(score, 98)
-            
-            c_m1, c_m2 = st.columns([1, 3])
-            with c_m1:
-                st.metric(label=sch["Name"], value=f"{score}% Match")
-            with c_m2:
-                st.progress(score / 100)
-                st.caption(f"**Why Matched:** Meets GPA ({sch['Min GPA']}+) and IELTS ({sch['IELTS']}+) baseline. Strong alignment with {u_course}.")
 
+    st.markdown("### 🎯 Your Personalized Scholarship Matches")
+
+    results = []
+
+    for _, sch in scholarships_csv.iterrows():
+
+        score = 0
+
+        # GPA Score
+        if u_gpa >= sch["Min GPA"]:
+            score += 30
+
+        # Experience Score
+        if u_exp >= sch["Min Exp (Yrs)"]:
+            score += 20
+
+        # IELTS Score
+        if u_ielts >= sch["IELTS"]:
+            score += 20
+
+        # Degree Match
+        if u_degree == sch["Level"]:
+            score += 15
+
+        # Field Match
+        if u_course.lower() in str(sch["Field"]).lower():
+            score += 15
+
+        results.append({
+            "Scholarship": sch["Name"],
+            "Country": sch["Host Country"],
+            "Match Score": score,
+            "Link": sch["Link"]
+        })
+
+    results_df = pd.DataFrame(results)
+
+    results_df = results_df.sort_values(
+        "Match Score",
+        ascending=False
+    )
+
+    st.data_editor(
+        results_df.head(10),
+        column_config={
+            "Link": st.column_config.LinkColumn(
+                "Apply",
+                display_text="🔗 Apply Now"
+            )
+        },
+        hide_index=True,
+        use_container_width=True
+    )
+
+    st.markdown("### 🏆 Top Recommended Scholarships")
+
+    for _, row in results_df.head(5).iterrows():
+
+        with st.expander(
+            f"{row['Scholarship']} ({row['Match Score']}%)"
+        ):
+
+            st.metric(
+                "Match Score",
+                f"{row['Match Score']}%"
+            )
+
+            st.write(
+                f"Host Country: {row['Country']}"
+            )
+
+            st.markdown(
+                f"[Apply Here]({row['Link']})"
+            )
 # ---------------------------------------------------------
 # TAB 3: SCHOLARSHIP DEADLINE INTELLIGENCE CENTER
 # ---------------------------------------------------------

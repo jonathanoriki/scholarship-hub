@@ -9,3 +9,4 @@ bcrypt
 python-dotenv
 streamlit-option-menu
 streamlit-aggrid
+openai>=1.0.0

@@ -387,7 +387,20 @@ with tabs[0]:
             st.write(f"**Field Coverage:** {item['Field']}")
             st.write(f"**Prerequisites:** Min GPA {item['Min GPA']} | IELTS Band {item['IELTS']} | Min Work Experience: {item['Min Exp (Yrs)']} Yrs")
             st.markdown(f"👉 [Apply on Official Website]({item['Link']})")
+if st.button(
+    f"⭐ Save {item['Name']}",
+    key=f"save_{item['Name']}"
+):
 
+    st.session_state.saved_scholarships.append(
+        {
+            "Scholarship": item["Name"],
+            "Country": item["Host Country"],
+            "Link": item["Link"]
+        }
+    )
+
+    st.success("Scholarship saved successfully.")
 # ---------------------------------------------------------
 # TAB 2: SCHOLARSHIP RECOMMENDATION ENGINE
 # ---------------------------------------------------------

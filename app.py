@@ -332,7 +332,10 @@ with tabs[0]:
     if s_field != "All":
         df = df[df["Field"].str.contains(s_field, case=False, na=False)]
         
-    st.dataframe(df[["Name", "Level", "Host Country", "Funding Type", "Min GPA", "IELTS", "Deadline"]], use_container_width=True)
+    st.dataframe(
+    df[["Name", "Level", "Host Country", "Funding Type", "Min GPA", "IELTS", "Deadline", "Link"]],
+    use_container_width=True
+)
     
     st.markdown("### Featured Quick Match")
     for item in df.to_dict(orient="records"):

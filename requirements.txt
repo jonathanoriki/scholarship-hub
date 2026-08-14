@@ -2,7 +2,6 @@ streamlit
 pandas
 numpy
 plotly
-openai
 sqlalchemy
 streamlit-authenticator
 bcrypt

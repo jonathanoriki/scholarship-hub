@@ -460,22 +460,51 @@ with tabs[2]:
 # TAB 4: COUNTRY STUDY HUB
 # ---------------------------------------------------------
 with tabs[3]:
-    st.subheader("🌍 Destination Study Guides")
-    selected_country_hub = st.selectbox("Select Study Destination", ["Germany 🇩🇪", "United Kingdom 🇬🇧", "USA 🇺🇸", "Canada 🇨🇦", "Australia 🇦🇺"])
-    
-    if "Germany" in selected_country_hub:
-        st.markdown("""
-        <div class="card-box">
-            <h3>🇩🇪 Study in Germany Overview</h3>
-            <p><b>Why Germany:</b> Tuition-free public universities, world-class research infrastructure, and post-study work opportunities.</p>
-            <ul>
-                <li><b>Cost of Living:</b> ~€934/month (Blocked Account requirement: ~€11,208/year)</li>
-                <li><b>Student Visa Process:</b> Requires APS certificate (where applicable), admission letter, and proof of funds.</li>
-                <li><b>Post-Study Work Permit:</b> 18 months extension granted post-graduation.</li>
-                <li><b>Top Opportunities:</b> DAAD EPOS, Heinrich Böll, Konrad-Adenauer-Stiftung.</li>
-            </ul>
-        </div>
-        """, unsafe_allow_html=True)
+
+    st.subheader("🌍 Country Intelligence Hub")
+
+    selected_country = st.selectbox(
+        "Select Study Destination",
+        countries_csv["Country"].tolist()
+    )
+
+    country_info = countries_csv[
+        countries_csv["Country"] == selected_country
+    ].iloc[0]
+
+    col1, col2, col3 = st.columns(3)
+
+    with col1:
+        st.metric(
+            "💰 Cost of Living",
+            country_info["Living_Cost"]
+        )
+
+    with col2:
+        st.metric(
+            "💼 Work Rights",
+            country_info["Work_Rights"]
+        )
+
+    with col3:
+        st.metric(
+            "🎓 Post-Study Visa",
+            country_info["Post_Study_Visa"]
+        )
+
+    st.markdown("---")
+
+    st.markdown(f"""
+### 🌍 Study in {selected_country}
+
+**Cost of Living:** {country_info["Living_Cost"]}
+
+**Work Rights:** {country_info["Work_Rights"]}
+
+**Post-Study Visa:** {country_info["Post_Study_Visa"]}
+
+ScholarAtlas Country Intelligence provides students with key information for planning their academic journey abroad.
+""")
 
 # ---------------------------------------------------------
 # TAB 5: UNIVERSITY FINDER

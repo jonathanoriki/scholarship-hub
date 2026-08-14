@@ -696,58 +696,68 @@ with tabs[13]:
 # ---------------------------------------------------------
 with tabs[14]:
 
-    st.subheader("🤖 AI Scholarship Advisory Coach")
+    st.subheader("🤖 Scholarship Advisory Coach")
 
     user_query = st.text_area(
         "Describe your profile",
         placeholder="Example: I am a Clinical Officer from Kenya with GPA 3.4, 2 years experience, interested in Public Health and fully funded Master's scholarships."
     )
 
-    if st.button("Generate AI Scholarship Advice"):
+    if st.button("Generate Scholarship Advice"):
 
-        with st.spinner("Analyzing your profile..."):
+        st.markdown("### 🎯 Scholarship Recommendations")
 
-            try:
+        query = user_query.lower()
 
-                response = client.chat.completions.create(
-                    model="gpt-4o-mini",
-                    messages=[
-                        {
-                            "role": "system",
-                            "content": """
-                            You are ScholarAtlas AI,
-                            a world-class scholarship advisor.
+        matches = []
 
-                            Give:
-                            1. Suitable scholarships
-                            2. Eligibility assessment
-                            3. Application strategy
-                            4. Essay recommendations
-                            5. Timeline guidance
+        for _, sch in scholarships_csv.iterrows():
 
-                            Keep responses professional and practical.
-                            """
-                        },
-                        {
-                            "role": "user",
-                            "content": user_query
-                        }
-                    ],
-                    temperature=0.7
+            score = 0
+
+            if "public health" in query and "public health" in str(sch["Field"]).lower():
+                score += 30
+
+            if "clinical" in query and "clinical" in str(sch["Field"]).lower():
+                score += 30
+
+            if "master" in query and "master" in str(sch["Level"]).lower():
+                score += 20
+
+            if "fully funded" in query and "fully" in str(sch["Funding Type"]).lower():
+                score += 20
+
+            matches.append(
+                {
+                    "Scholarship": sch["Name"],
+                    "Country": sch["Host Country"],
+                    "Score": score,
+                    "Link": sch["Link"]
+                }
+            )
+
+        results_df = pd.DataFrame(matches)
+
+        results_df = results_df.sort_values(
+            "Score",
+            ascending=False
+        )
+
+        st.data_editor(
+            results_df.head(10),
+            column_config={
+                "Link": st.column_config.LinkColumn(
+                    "Apply",
+                    display_text="🔗 Apply"
                 )
+            },
+            hide_index=True,
+            use_container_width=True
+        )
 
-                st.success("AI Analysis Complete")
-
-                st.write(
-                    response.choices[0].message.content
-                )
-
-            except Exception as e:
-
-                st.error(
-                    f"OpenAI Error: {e}"
-                )
-
+        st.success(
+            "Recommendations generated using the ScholarAtlas scholarship database."
+        )
 # ---------------------------------------------------------
 # TAB 16: COMMUNITY FORUM
 # ---------------------------------------------------------

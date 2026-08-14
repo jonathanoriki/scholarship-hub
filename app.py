@@ -413,7 +413,7 @@ with tabs[1]:
             
         submit_match = st.form_submit_button("Calculate Matching Scores", type="primary")
 
-    if submit_match:
+     if submit_match:
 
     st.markdown("### 🎯 Your Personalized Scholarship Matches")
 

@@ -335,7 +335,8 @@ tabs = st.tabs([
     "🌟 Fellowships", 
     "🔬 Research Grants", 
     "🏆 Success Stories", 
-    "💬 AI Coach", 
+    "💬 AI Coach",
+    "⭐ Saved Scholarships",
     "💬 Community Forum"
 ])
 
@@ -761,6 +762,31 @@ with tabs[14]:
             "Recommendations generated using the ScholarAtlas scholarship database."
         )
 # ---------------------------------------------------------
+with tabs[15]:
+
+    st.subheader("⭐ My Saved Scholarships")
+
+    if len(st.session_state.saved_scholarships) == 0:
+
+        st.info("You have not saved any scholarships yet.")
+
+    else:
+
+        saved_df = pd.DataFrame(
+            st.session_state.saved_scholarships
+        )
+
+        st.data_editor(
+            saved_df,
+            column_config={
+                "Link": st.column_config.LinkColumn(
+                    "Apply",
+                    display_text="🔗 Open"
+                )
+            },
+            hide_index=True,
+            use_container_width=True
+        )
 # TAB 16: COMMUNITY FORUM
 # ---------------------------------------------------------
 with tabs[15]:

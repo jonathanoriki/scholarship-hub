@@ -332,8 +332,16 @@ with tabs[0]:
     if s_field != "All":
         df = df[df["Field"].str.contains(s_field, case=False, na=False)]
         
-    st.dataframe(
+    st.data_editor(
     df[["Name", "Level", "Host Country", "Funding Type", "Min GPA", "IELTS", "Deadline", "Link"]],
+    column_config={
+        "Link": st.column_config.LinkColumn(
+            "Apply",
+            help="Open scholarship website",
+            display_text="🔗 Apply Now"
+        )
+    },
+    hide_index=True,
     use_container_width=True
 )
     

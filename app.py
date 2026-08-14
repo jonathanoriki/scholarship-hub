@@ -510,15 +510,45 @@ ScholarAtlas Country Intelligence provides students with key information for pla
 # TAB 5: UNIVERSITY FINDER
 # ---------------------------------------------------------
 with tabs[4]:
+
     st.subheader("🏛️ Global University Intelligence Database")
-    
-    unis = [
-        {"University": "University of Oxford", "Country": "UK", "QS Rank": 3, "Acceptance Rate": "17%", "IELTS": 7.5, "Employability Score": 98.2},
-        {"University": "Heidelberg University", "Country": "Germany", "QS Rank": 65, "Acceptance Rate": "18%", "IELTS": 6.5, "Employability Score": 91.5},
-        {"University": "University of Toronto", "Country": "Canada", "QS Rank": 21, "Acceptance Rate": "43%", "IELTS": 7.0, "Employability Score": 94.0},
-        {"University": "Harvard University", "Country": "USA", "QS Rank": 4, "Acceptance Rate": "4%", "IELTS": 7.5, "Employability Score": 99.0}
-    ]
-    st.dataframe(pd.DataFrame(unis), use_container_width=True)
+
+    selected_country_uni = st.selectbox(
+        "Filter Universities by Country",
+        ["All"] + sorted(universities_csv["Country"].unique().tolist())
+    )
+
+    uni_df = universities_csv.copy()
+
+    if selected_country_uni != "All":
+        uni_df = uni_df[
+            uni_df["Country"] == selected_country_uni
+        ]
+
+    st.dataframe(
+        uni_df,
+        use_container_width=True
+    )
+
+    st.markdown("### 🎓 University Profiles")
+
+    for _, uni in uni_df.iterrows():
+
+        with st.expander(
+            f"{uni['University']} ({uni['Country']})"
+        ):
+
+            st.write(
+                f"**QS Ranking:** {uni['QS_Ranking']}"
+            )
+
+            st.write(
+                f"**Annual Tuition:** {uni['Tuition']}"
+            )
+
+            st.write(
+                f"**Minimum IELTS:** {uni['IELTS']}"
+            )
 
 # ---------------------------------------------------------
 # TAB 6: ESSAY LIBRARY

@@ -1,7 +1,6 @@
 import streamlit as st
 import pandas as pd
 from datetime import date, datetime, timedelta
-from openai import OpenAI
 # LOAD CSV DATABASES
 
 try:
@@ -18,9 +17,6 @@ try:
     countries_csv = pd.read_csv("data/countries.csv")
 except:
     countries_csv = pd.DataFrame()
-client = OpenAI(
-    api_key=st.secrets["OPENAI_API_KEY"]
-)
 # ---------------------------------------------------------
 # PAGE CONFIGURATION & METADATA
 # ---------------------------------------------------------
